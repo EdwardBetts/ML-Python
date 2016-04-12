@@ -260,8 +260,8 @@ def doc_result(i, prob, totalProb, classType, finalCount, zeroCount, oneCount, h
     print "Document: " + str(i)
     print "Class: " + str(classType[i])
     if round(abs((prob[0][i] + (prob[1][i]))), 7) != 0:
-        print "Prob Class 1 (Ham): " + str("{0:.2f}%".format(100 * prob[1][i] / (prob[0][i] + (prob[1][i]))))
-        print "Prob Class 0 (Spam): " + str("{0:.2f}%".format(100 * prob[0][i] / (prob[0][i] + (prob[1][i]))))
+        print "Prob Class 1 (Ham): " + str("{0:.2%}".format(prob[1][i] / (prob[0][i] + (prob[1][i]))))
+        print "Prob Class 0 (Spam): " + str("{0:.2%}".format(prob[0][i] / (prob[0][i] + (prob[1][i]))))
     else:
         # working with floating-point, we need to avoid a division-by-zero
         print "Predicted Class: " + str(totalProb[i])
@@ -303,7 +303,7 @@ def nbc_test(counter, testset, FEATURES, wordCount, classType, theta, prior, mut
     finalCount, zeroCount, oneCount, hamCount = calculate_prob(counter, testset, FEATURES, wordCount, classType, theta, prob, prior, totalProb, mutualInfo, filtering)
     spamCount = testset - hamCount
 
-    print "Test Accuracy = " + str("{0:.2f}%".format(100 * (float(finalCount) / testset)))
+    print "Test Accuracy = " + "{:.2%}".format(float(finalCount) / testset)
     print "Fraction Correct: " + str(finalCount) + " / " + str(testset)
     print "Correct Ham Samples: " + str(oneCount) + " / " + str(hamCount)
     print "Correct Spam Samples: " + str(zeroCount) + " / " + str(spamCount)
